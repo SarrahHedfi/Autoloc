@@ -9,10 +9,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.autoloc.DTO.VehicuelDTO;
 import tn.esprit.autoloc.Entities.Employe;
 import tn.esprit.autoloc.Entities.Vehicule;
 import tn.esprit.autoloc.Services.IVehicule;
 
+import java.net.BindException;
 import java.util.List;
 
 @RestController
@@ -26,12 +28,12 @@ public class VehiculeController {
     public ResponseEntity<Vehicule> ajouter(
             @Valid @RequestBody Vehicule vehicule) {
 
-        Vehicule nouveau =
-                iVehicule.ajouterVehicule(vehicule);
+        Vehicule nouveau = iVehicule.ajouterVehicule(vehicule);
 
-        return ResponseEntity.status(
-                HttpStatus.CREATED)
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
                 .body(nouveau);
+
     }
 
     @GetMapping("/GetAll")
@@ -69,4 +71,29 @@ public class VehiculeController {
                                   @PathVariable Long idAgence){
         return iVehicule.affecterVehicule(idVehicule,idAgence);
     }
+    //findBYMarque
+    @GetMapping("/GetAllByMarque/{marque}")
+    public List<Vehicule> afficherTousParMarque(@PathVariable String marque) {
+        return
+                iVehicule.findByMarque(marque);
+    }
+    //findByStatut
+    @GetMapping("/GetAllDisponible")
+    public List<Vehicule> getALLDispo() {
+        return
+                iVehicule.getVehiculesDisponibles();
+    }
+    @GetMapping("/GetByModel")
+    public List<Vehicule> findByModeleStartingWith(String modele) {
+        return iVehicule.findByModeleStartingWith(modele);
+    }
+//    @GetMapping("/GetVehiculeByAgence/{idAgence}")
+//    public List<Vehicule> getVehiculeByAgence(@PathVariable Long idAgence) {
+//        return iVehicule.getVehiculesByAgence(idAgence);
+//    }
+        @GetMapping("/GetVehiculeByAgence/{idAgence}")
+    public List<VehicuelDTO> getVehiculeByAgence(@PathVariable Long idAgence) {
+        return iVehicule.getVehiculesByAgence(idAgence);
+    }
 }
+

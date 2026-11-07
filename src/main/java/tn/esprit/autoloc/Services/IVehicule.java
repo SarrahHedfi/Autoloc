@@ -1,5 +1,7 @@
 package tn.esprit.autoloc.Services;
 
+import tn.esprit.autoloc.DTO.VehicuelDTO;
+import tn.esprit.autoloc.Entities.StatutVehicule;
 import tn.esprit.autoloc.Entities.Vehicule;
 
 import java.util.List;
@@ -15,5 +17,10 @@ public interface IVehicule {
 
     void supprimerVehicule(Long id);
     public Vehicule affecterVehicule(Long idVehicule, Long idAgence);
+    List<Vehicule> findByMarque(String marque);
 
+    List<Vehicule> getVehiculesDisponibles();
+    List<Vehicule> findByModeleStartingWith(String modele);
+   // public List<Vehicule> getVehiculesByAgence(Long idAgence);
+   List<VehicuelDTO> getVehiculesByAgence(Long idAgence);
 }

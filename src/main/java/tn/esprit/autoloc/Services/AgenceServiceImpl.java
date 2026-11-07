@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.autoloc.Entities.Agence;
 import tn.esprit.autoloc.Entities.Employe;
+import tn.esprit.autoloc.Entities.Vehicule;
 import tn.esprit.autoloc.Repositories.AgenceRepo;
 import tn.esprit.autoloc.Repositories.EmployeRepo;
+import tn.esprit.autoloc.Repositories.VehiculeRepo;
 
 import java.util.HashSet;
 import java.util.List;
@@ -19,6 +21,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AgenceServiceImpl implements IAgence {
    private final AgenceRepo agenceRepo;
+   private final VehiculeRepo vehiculeRepo;
 
     @Override
     public Agence addAgence(Agence agence) {
@@ -50,4 +53,7 @@ public class AgenceServiceImpl implements IAgence {
     public Agence updateAgence(Agence agence) {
         return agenceRepo.save(agence);
     }
+
+
+
 }

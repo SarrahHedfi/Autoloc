@@ -1,6 +1,7 @@
 package tn.esprit.autoloc.Services;
 
 import tn.esprit.autoloc.Entities.Agence;
+import tn.esprit.autoloc.Entities.Vehicule;
 
 import java.util.List;
 import java.util.Set;

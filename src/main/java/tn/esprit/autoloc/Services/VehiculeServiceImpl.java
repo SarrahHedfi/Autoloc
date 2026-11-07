@@ -3,8 +3,8 @@ package tn.esprit.autoloc.Services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tn.esprit.autoloc.DTO.VehicuelDTO;
 import tn.esprit.autoloc.Entities.Agence;
-import tn.esprit.autoloc.Entities.Equipement;
 import tn.esprit.autoloc.Entities.StatutVehicule;
 import tn.esprit.autoloc.Entities.Vehicule;
 import tn.esprit.autoloc.Repositories.AgenceRepo;
@@ -81,10 +81,34 @@ public class VehiculeServiceImpl implements IVehicule{
         Agence agence = agenceRepo.findById(idAgence)
                 .orElseThrow();
         vehicule.setAgence(agence);
+        //Modifier le statut disponible pour la location
         vehicule.setStatut(StatutVehicule.DISPONIBLE);
         return vehiculeRepo.save(vehicule);
     }
 
-
+    @Override
+    public List<Vehicule> findByMarque(String marque) {
+        return vehiculeRepo.findByMarque(marque);
     }
+    @Override
+    public List<Vehicule> getVehiculesDisponibles() {
+        return vehiculeRepo.findByStatut(
+                StatutVehicule.DISPONIBLE
+        );
+    }
+
+    @Override
+    public List<Vehicule> findByModeleStartingWith(String modele) {
+        return vehiculeRepo.findByModeleStartingWith(modele);
+    }
+
+    @Override
+    public List<VehicuelDTO> getVehiculesByAgence(Long idAgence) {
+        return vehiculeRepo.getVehiculesByAgence(idAgence);
+    }
+//    @Override
+//    public List<Vehicule> getVehiculesByAgence(Long idAgence) {
+//        return vehiculeRepo.getVehiculesByAgence(idAgence);
+//    }
+}
 

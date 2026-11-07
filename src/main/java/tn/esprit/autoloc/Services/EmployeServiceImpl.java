@@ -22,7 +22,6 @@ public class EmployeServiceImpl implements IEmploye {
         employe.setAgence(null);
         return employeRepo.save(employe);
     }
-
     @Override
     public Employe affecterEmploye(Long idEmploye, Long idAgence) {
         Employe employe = employeRepo.findById(idEmploye)
